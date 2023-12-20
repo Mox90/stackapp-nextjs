@@ -1,26 +1,26 @@
-'use client';
-import React from 'react';
+'use client'
+import React from 'react'
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTrigger,
-} from '@/components/ui/sheet';
-import Image from 'next/image';
-import Link from 'next/link';
-import { SignedOut } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
-import { sidebarLinks } from '@/constants';
-import { usePathname } from 'next/navigation';
+} from '@/components/ui/sheet'
+import Image from 'next/image'
+import Link from 'next/link'
+import { SignedOut } from '@clerk/nextjs'
+import { Button } from '@/components/ui/button'
+import { sidebarLinks } from '@/constants'
+import { usePathname } from 'next/navigation'
 
 const NavContent = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
   return (
     <section className='flex h-full flex-col gap-6 pt-10'>
       {sidebarLinks.map((link) => {
         const isActive =
           (pathname.includes(link.route) && link.route.length > 1) ||
-          pathname === link.route;
+          pathname === link.route
 
         return (
           <SheetClose asChild key={link.route}>
@@ -44,11 +44,11 @@ const NavContent = () => {
               </p>
             </Link>
           </SheetClose>
-        );
+        )
       })}
     </section>
-  );
-};
+  )
+}
 
 const MobileNav = () => {
   return (
@@ -104,7 +104,7 @@ const MobileNav = () => {
         </div>
       </SheetContent>
     </Sheet>
-  );
-};
+  )
+}
 
-export default MobileNav;
+export default MobileNav

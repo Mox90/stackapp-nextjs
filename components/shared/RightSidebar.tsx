@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import RenderTag from './RenderTag';
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import RenderTag from './RenderTag'
 
 const hotQuestions = [
   {
@@ -25,7 +25,7 @@ const hotQuestions = [
     _id: '5',
     title: 'Redux Toolkit Not Updating State as Expected',
   },
-];
+]
 
 const popularTags = [
   { _id: '1', name: 'javascript', totalQuestions: 234 },
@@ -34,7 +34,7 @@ const popularTags = [
   { _id: '4', name: 'next', totalQuestions: 2897 },
   { _id: '5', name: 'redux', totalQuestions: 675 },
   { _id: '6', name: 'saga', totalQuestions: 98 },
-];
+]
 
 const RightSidebar = () => {
   return (
@@ -78,7 +78,7 @@ const RightSidebar = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default RightSidebar;
+export default RightSidebar

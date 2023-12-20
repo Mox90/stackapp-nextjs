@@ -1,16 +1,16 @@
-import { markAssetError } from 'next/dist/client/route-loader';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import { markAssetError } from 'next/dist/client/route-loader'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 
 interface Props {
-  imgUrl: string;
-  alt: string;
-  value: number | string;
-  title: string;
-  textStyle?: string;
-  href?: string;
-  isAuthor?: boolean;
+  imgUrl: string
+  alt: string
+  value: number | string
+  title: string
+  textStyle?: string
+  href?: string
+  isAuthor?: boolean
 }
 
 const Metric = ({
@@ -43,17 +43,17 @@ const Metric = ({
         </span>
       </p>
     </>
-  );
+  )
 
   if (href) {
     return (
       <Link href={href} className='flex-center gap-1'>
         {metricContent}
       </Link>
-    );
+    )
   }
 
-  return <div className='flex-center flex-wrap gap-1'>{metricContent}</div>;
-};
+  return <div className='flex-center flex-wrap gap-1'>{metricContent}</div>
+}
 
-export default Metric;
+export default Metric

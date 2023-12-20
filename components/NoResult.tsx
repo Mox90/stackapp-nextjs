@@ -1,13 +1,13 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { Button } from './ui/button';
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import { Button } from './ui/button'
 
 interface Props {
-  head: string;
-  body: string;
-  link: string;
-  linkTitle: string;
+  head: string
+  body: string
+  link: string
+  linkTitle: string
 }
 const NoResult = ({ head, body, link, linkTitle }: Props) => {
   return (
@@ -38,7 +38,7 @@ const NoResult = ({ head, body, link, linkTitle }: Props) => {
         </Button>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default NoResult;
+export default NoResult

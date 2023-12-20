@@ -1,14 +1,14 @@
-'use client';
-import { Input } from '@/components/ui/input';
-import Image from 'next/image';
-import React from 'react';
+'use client'
+import { Input } from '@/components/ui/input'
+import Image from 'next/image'
+import React from 'react'
 
 interface Props {
-  route: string;
-  iconPosition: string;
-  imgSrc: string;
-  placeholder: string;
-  otherClasses?: string;
+  route: string
+  iconPosition: string
+  imgSrc: string
+  placeholder: string
+  otherClasses?: string
 }
 
 const LocalSearch = ({
@@ -48,7 +48,7 @@ const LocalSearch = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default LocalSearch;
+export default LocalSearch

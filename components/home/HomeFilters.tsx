@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { HomePageFilters } from '@/constants/filters';
-import React from 'react';
-import { Button } from '../ui/button';
+import { HomePageFilters } from '@/constants/filters'
+import React from 'react'
+import { Button } from '../ui/button'
 
 const HomeFilters = () => {
-  const active = 'newest';
+  const active = 'newest'
 
   return (
     <div className='mt-10 hidden flex-wrap gap-3 md:flex'>
@@ -23,7 +23,7 @@ const HomeFilters = () => {
         </Button>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default HomeFilters;
+export default HomeFilters

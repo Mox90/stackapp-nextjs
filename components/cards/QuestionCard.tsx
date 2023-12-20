@@ -1,18 +1,18 @@
-import Link from 'next/link';
-import React from 'react';
-import RenderTag from '../shared/RenderTag';
-import Metric from '../shared/Metric';
-import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
+import Link from 'next/link'
+import React from 'react'
+import RenderTag from '../shared/RenderTag'
+import Metric from '../shared/Metric'
+import { formatAndDivideNumber, getTimestamp } from '@/lib/utils'
 
 interface Props {
-  _id: string;
-  title: string;
-  tags: { _id: string; name: string }[];
-  author: { _id: string; name: string; avatar: string };
-  upvotes: number;
-  views: number;
-  answers: Array<object>;
-  createdAt: Date;
+  _id: string
+  title: string
+  tags: { _id: string; name: string }[]
+  author: { _id: string; name: string; avatar: string }
+  upvotes: number
+  views: number
+  answers: Array<object>
+  createdAt: Date
 }
 
 const QuestionCard = ({
@@ -44,7 +44,7 @@ const QuestionCard = ({
 
       <div className='mt-3.5 flex flex-wrap gap-2'>
         {tags.map((tag) => (
-          <RenderTag key={tag._id} {...tag} />
+          <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
 
@@ -81,7 +81,7 @@ const QuestionCard = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuestionCard;
+export default QuestionCard

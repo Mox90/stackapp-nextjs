@@ -1,10 +1,10 @@
-import { SidebarLink } from '@/types';
+import { SidebarLink } from '@/types'
 
 export const themes = [
   { value: 'light', label: 'Light', icon: '/assets/icons/sun.svg' },
   { value: 'dark', label: 'Dark', icon: '/assets/icons/moon.svg' },
   { value: 'system', label: 'System', icon: '/assets/icons/computer.svg' },
-];
+]
 
 export const sidebarLinks: SidebarLink[] = [
   {
@@ -42,7 +42,7 @@ export const sidebarLinks: SidebarLink[] = [
     route: '/ask-question',
     label: 'Ask a question',
   },
-];
+]
 
 export const BADGE_CRITERIA = {
   QUESTION_COUNT: {
@@ -70,4 +70,4 @@ export const BADGE_CRITERIA = {
     SILVER: 10000,
     GOLD: 100000,
   },
-};
+}

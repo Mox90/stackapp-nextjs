@@ -1,12 +1,13 @@
-import NoResult from '@/components/NoResult';
-import QuestionCard from '@/components/cards/QuestionCard';
-import Filter from '@/components/shared/Filter';
-import LocalSearch from '@/components/shared/search/LocalSearch';
-import { Button } from '@/components/ui/button';
-import { HomePageFilters } from '@/constants/filters';
-import Link from 'next/link';
+import NoResult from '@/components/NoResult'
+import QuestionCard from '@/components/cards/QuestionCard'
+import Filter from '@/components/shared/Filter'
+import LocalSearch from '@/components/shared/search/LocalSearch'
+import { Button } from '@/components/ui/button'
+import { HomePageFilters } from '@/constants/filters'
+import { getQuestions } from '@/lib/actions/question.action'
+import Link from 'next/link'
 
-const questions = [
+/* const questions = [
   {
     _id: '1',
     title: 'Cascading deletes in SQLAlchemy?',
@@ -31,9 +32,13 @@ const questions = [
     answers: [],
     createdAt: new Date('2021-09-01T12:00:00.000Z'),
   },
-];
+] */
 
-export default function Home() {
+export default async function Home() {
+  const { questions } = await getQuestions({})
+
+  // console.log(questions[0].createdAt)
+
   return (
     <>
       <div className='flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center'>
@@ -63,9 +68,21 @@ export default function Home() {
       />
       <div className='mt-10 flex w-full flex-col gap-6'>
         {questions.length > 0 ? (
-          questions.map((question) => (
-            <QuestionCard key={question._id} {...question} />
-          ))
+          questions.map((question) => {
+            return (
+              <QuestionCard
+                key={question._id}
+                _id={question._id}
+                title={question.title}
+                tags={question.tags}
+                author={question.author}
+                upvotes={question.upvotes}
+                views={question.views}
+                answers={question.answers}
+                createdAt={question.createdAt}
+              />
+            )
+          })
         ) : (
           <NoResult
             head="There's no question to show"
@@ -78,5 +95,5 @@ export default function Home() {
         )}
       </div>
     </>
-  );
+  )
 }

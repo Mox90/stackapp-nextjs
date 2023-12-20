@@ -1,7 +1,7 @@
-'use client';
-import { Input } from '@/components/ui/input';
-import Image from 'next/image';
-import React from 'react';
+'use client'
+import { Input } from '@/components/ui/input'
+import Image from 'next/image'
+import React from 'react'
 
 const GlobalSearch = () => {
   return (
@@ -24,7 +24,7 @@ const GlobalSearch = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GlobalSearch;
+export default GlobalSearch

@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import { useTheme } from '@/context/ThemeProvider';
-import React from 'react';
+import { useTheme } from '@/context/ThemeProvider'
+import React from 'react'
 
 import {
   Menubar,
@@ -9,12 +9,12 @@ import {
   MenubarItem,
   MenubarMenu,
   MenubarTrigger,
-} from '@/components/ui/menubar';
-import Image from 'next/image';
-import { themes } from '@/constants';
+} from '@/components/ui/menubar'
+import Image from 'next/image'
+import { themes } from '@/constants'
 
 const Theme = () => {
-  const { mode, setMode } = useTheme();
+  const { mode, setMode } = useTheme()
 
   return (
     <Menubar className='relative border-none bg-transparent shadow-none'>
@@ -43,12 +43,12 @@ const Theme = () => {
             <MenubarItem
               key={theme.value}
               onClick={() => {
-                setMode(theme.value);
+                setMode(theme.value)
 
                 if (theme.value !== 'system') {
-                  localStorage.theme = theme.value;
+                  localStorage.theme = theme.value
                 } else {
-                  localStorage.removeItem('theme');
+                  localStorage.removeItem('theme')
                 }
               }}
               className='flex items-center gap-4 px-2.5 py-2 dark:focus:bg-dark-400'
@@ -74,7 +74,7 @@ const Theme = () => {
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
-  );
-};
+  )
+}
 
-export default Theme;
+export default Theme

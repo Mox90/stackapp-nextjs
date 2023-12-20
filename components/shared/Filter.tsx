@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   Select,
@@ -7,16 +7,16 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import HomeFilters from '../home/HomeFilters';
+} from '@/components/ui/select'
+import HomeFilters from '../home/HomeFilters'
 
 interface Props {
   filters: {
-    name: string;
-    value: string;
-  }[];
-  otherClasses?: string;
-  containerClasses?: string;
+    name: string
+    value: string
+  }[]
+  otherClasses?: string
+  containerClasses?: string
 }
 
 const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
@@ -44,7 +44,7 @@ const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
       </div>
       <HomeFilters />
     </>
-  );
-};
+  )
+}
 
-export default Filter;
+export default Filter

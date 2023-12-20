@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { sidebarLinks } from '@/constants';
-import { SignedOut } from '@clerk/nextjs';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React from 'react';
-import { Button } from '../ui/button';
+import { sidebarLinks } from '@/constants'
+import { SignedOut } from '@clerk/nextjs'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React from 'react'
+import { Button } from '../ui/button'
 
 const LeftSidebar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
   return (
     <section className=' background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-6 pt-24 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[300px] lg:pt-28'>
       <div className='flex flex-1 flex-col gap-6'>
         {sidebarLinks.map((link) => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||
-            pathname === link.route;
+            pathname === link.route
 
           return (
             <div key={link.route} className=''>
@@ -44,7 +44,7 @@ const LeftSidebar = () => {
                 </p>
               </Link>
             </div>
-          );
+          )
         })}
       </div>
 
@@ -84,7 +84,7 @@ const LeftSidebar = () => {
         </div>
       </SignedOut>
     </section>
-  );
-};
+  )
+}
 
-export default LeftSidebar;
+export default LeftSidebar
