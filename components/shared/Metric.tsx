@@ -1,4 +1,3 @@
-import { markAssetError } from 'next/dist/client/route-loader'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'

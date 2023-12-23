@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { Badge, badgeVariants } from '@/components/ui/badge'
+import { Badge } from '@/components/ui/badge'
 
 interface Props {
   _id: string
