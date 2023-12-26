@@ -5,7 +5,11 @@ import Question from '../models/question.model'
 import Tag from '../models/tag.model'
 import User from '../models/user.model'
 import { connectToDatabase } from '../mongoose'
-import { CreateQuestionParams, GetQuestionsParams } from './shared.types'
+import {
+  CreateQuestionParams,
+  GetQuestionByIdParams,
+  GetQuestionsParams,
+} from './shared.types'
 
 export const getQuestions = async (params: GetQuestionsParams) => {
   try {
@@ -17,6 +21,25 @@ export const getQuestions = async (params: GetQuestionsParams) => {
       .sort({ createdAt: -1 })
     // console.log(questions[0].author)
     return { questions }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export const getQuestionById = async (params: GetQuestionByIdParams) => {
+  try {
+    connectToDatabase()
+
+    const question = await Question.findById(params.questionId)
+      .populate({ path: 'tags', model: Tag, select: '_id name' })
+      .populate({
+        path: 'author',
+        model: User,
+        select: '_id clerkId name picture',
+      })
+
+    return question
   } catch (error) {
     console.log(error)
     throw error
