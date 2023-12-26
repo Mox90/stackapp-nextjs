@@ -33,10 +33,10 @@ const AnswerSchema = new Schema<IAnswer>(
       },
     ],
     downvotes: [
-      {
+      /* {
         type: Schema.Types.ObjectId,
         ref: 'User',
-      },
+      }, */
     ],
   },
   { timestamps: true }
