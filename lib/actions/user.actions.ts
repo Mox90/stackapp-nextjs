@@ -10,6 +10,7 @@ import {
   GetAllUsersParams,
   GetSavedQuestionsParams,
   GetUserByIdParams,
+  GetUserStatsParams,
   ToggleSaveQuestionParams,
   UpdateUserParams,
 } from './shared.types'
@@ -25,9 +26,9 @@ export const getUserById = async (params: any) => {
 
     const user = await User.findOne({ clerkId: userId })
 
-    if (!user) {
+    /*    if (!user) {
       throw new Error('User not found')
-    }
+    } */
 
     return user
   } catch (error) {
@@ -204,5 +205,47 @@ export const getUserInfo = async (params: GetUserByIdParams) => {
       totalQuestions,
       totalAnswers,
     }
+  } catch (error) {}
+}
+
+export const getUserQuestions = async (params: GetUserStatsParams) => {
+  try {
+    connectToDatabase()
+
+    const { userId, page = 1, pageSize = 10 } = params
+
+    const totalQuestions = await Question.countDocuments({ author: userId })
+
+    const userQuestions = await Question.find({ author: userId })
+      .sort({
+        views: -1,
+        upvotes: -1,
+      })
+      .populate('tags', '_id name')
+      .populate('author', 'Id clerkId name picture')
+
+    return { totalQuestions, questions: userQuestions, page, pageSize }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export const getUserAnswers = async (params: GetUserStatsParams) => {
+  try {
+    connectToDatabase()
+
+    const { userId, page = 1, pageSize = 10 } = params
+
+    const totalAnswers = await Answer.countDocuments({ author: userId })
+
+    const userAnswers = await Answer.find({ author: userId })
+      .sort({
+        upvotes: -1,
+      })
+      .populate('question', '_id title')
+      .populate('author', 'Id clerkId name picture')
+
+    return { totalAnswers, answers: userAnswers, page, pageSize }
   } catch (error) {}
 }

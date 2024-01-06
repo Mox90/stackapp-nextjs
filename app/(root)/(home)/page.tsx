@@ -38,8 +38,6 @@ import Link from 'next/link'
 export default async function Home() {
   const { questions } = await getQuestions({})
 
-  // console.log(questions[0].createdAt)
-
   return (
     <>
       <div className='flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center'>

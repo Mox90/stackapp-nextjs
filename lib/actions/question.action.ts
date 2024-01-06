@@ -4,9 +4,12 @@ import { revalidatePath } from 'next/cache'
 import Question from '../models/question.model'
 import Tag from '../models/tag.model'
 import User from '../models/user.model'
+import Answer from '../models/answer.model'
+import Interaction from '../models/interaction.model'
 import { connectToDatabase } from '../mongoose'
 import {
   CreateQuestionParams,
+  DeleteQuestionParams,
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
@@ -148,6 +151,27 @@ export const downvoteQuestion = async (params: QuestionVoteParams) => {
     }
 
     // Increment author's reputation by +10 for upvoting
+
+    revalidatePath(path)
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export const deleteQuestion = async (params: DeleteQuestionParams) => {
+  try {
+    connectToDatabase()
+
+    const { questionId, path } = params
+
+    await Question.deleteOne({ _id: questionId })
+    await Answer.deleteMany({ question: questionId })
+    await Interaction.deleteMany({ question: questionId })
+    await Tag.updateMany(
+      { questions: questionId },
+      { $pull: { questions: questionId } }
+    )
 
     revalidatePath(path)
   } catch (error) {
