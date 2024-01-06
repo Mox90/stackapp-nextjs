@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 interface Props {
   tag: {
+    _id: string
     name: string
     description: string
     questions: []
@@ -11,7 +12,7 @@ interface Props {
 const TagCard = ({ tag }: Props) => {
   return (
     <Link
-      href={`/tag/${tag.name}}`}
+      href={`/tags/${tag._id}}`}
       className='shadow-light100_darknone w-full max-xs:min-w-full xs:w-[260px]'
     >
       <article className='background-light900_dark200 light-border flex w-full flex-col items-center justify-start rounded-2xl border px-4 py-8 sm:w-[260px]'>
