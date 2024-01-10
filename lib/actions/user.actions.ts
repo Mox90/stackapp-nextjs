@@ -65,8 +65,11 @@ export const updateUser = async (params: UpdateUserParams) => {
     connectToDatabase()
 
     const { clerkId, updateData, path } = params
-    console.log('Logging ' + updateData.name)
-    await User.findOneAndUpdate({ clerkId }, updateData, { new: true })
+
+    console.log(updateData)
+    await User.findOneAndUpdate({ clerkId }, updateData, {
+      new: true,
+    })
 
     revalidatePath(path)
   } catch (error) {
@@ -225,7 +228,6 @@ export const getUserQuestions = async (params: GetUserStatsParams) => {
     throw error
   }
 }
-
 export const getUserAnswers = async (params: GetUserStatsParams) => {
   try {
     connectToDatabase()
@@ -244,3 +246,13 @@ export const getUserAnswers = async (params: GetUserStatsParams) => {
     return { totalAnswers, answers: userAnswers, page, pageSize }
   } catch (error) {}
 }
+
+/* export const updateUser = async (params: UpdateUserParams) => {
+  try {
+    connectToDatabase()
+
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+} */

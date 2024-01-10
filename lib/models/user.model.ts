@@ -8,7 +8,7 @@ export interface IUser extends Document {
   password?: string
   bio?: string
   picture: string
-  loc?: string
+  locations?: string
   portfolioWebsite?: string
   reputation?: number
   saved: Schema.Types.ObjectId[]
@@ -24,7 +24,7 @@ const UserSchema = new Schema<IUser>(
     password: { type: String },
     bio: { type: String },
     picture: { type: String, required: true },
-    loc: { type: String },
+    locations: { type: String },
     portfolioWebsite: { type: String },
     reputation: { type: Number, default: 0 },
     saved: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
