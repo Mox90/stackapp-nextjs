@@ -21,7 +21,7 @@ const EditDeleteActions = ({ type, itemId }: Props) => {
   const handleDelete = async () => {
     if (type === 'Question') {
       await deleteQuestion({ questionId: JSON.parse(itemId), path: pathname })
-    } else if (type === 'Answers') {
+    } else if (type === 'Answer') {
       await deleteAnswer({ answerId: JSON.parse(itemId), path: pathname })
     }
   }
