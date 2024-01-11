@@ -80,7 +80,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name='name'
           render={({ field }) => (
             <FormItem className='space-y-3.5'>
-              <FormLabel>
+              <FormLabel className='text-dark300_light900'>
                 Name <span className='text-primary-500'>*</span>
               </FormLabel>
               <FormControl>
@@ -99,7 +99,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name='username'
           render={({ field }) => (
             <FormItem className='space-y-3.5'>
-              <FormLabel>
+              <FormLabel className='text-dark300_light900'>
                 Username <span className='text-primary-500'>*</span>
               </FormLabel>
               <FormControl>
@@ -118,7 +118,9 @@ const Profile = ({ clerkId, user }: Props) => {
           name='portfolioWebsite'
           render={({ field }) => (
             <FormItem className='space-y-3.5'>
-              <FormLabel>Porfolio Link</FormLabel>
+              <FormLabel className='text-dark300_light900'>
+                Porfolio Link
+              </FormLabel>
               <FormControl>
                 <Input
                   type='url'
@@ -136,7 +138,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name='locations'
           render={({ field }) => (
             <FormItem className='space-y-3.5'>
-              <FormLabel>Location</FormLabel>
+              <FormLabel className='text-dark300_light900'>Location</FormLabel>
               <FormControl>
                 <Input
                   className='no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light900 min-h-[56px] border'
@@ -153,7 +155,7 @@ const Profile = ({ clerkId, user }: Props) => {
           name='bio'
           render={({ field }) => (
             <FormItem className='space-y-3.5'>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel className='text-dark300_light900'>Bio</FormLabel>
               <FormControl>
                 <Textarea
                   className='no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light900 min-h-[56px] border'
@@ -168,7 +170,7 @@ const Profile = ({ clerkId, user }: Props) => {
         <div className='mt-7 flex justify-end'>
           <Button
             type='submit'
-            className='primary-gradient w-fit'
+            className='primary-gradient text-dark300_light900 w-fit'
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Saving...' : 'Save'}

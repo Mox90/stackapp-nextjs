@@ -64,7 +64,6 @@ export default async function Home() {
           containerClasses='hidden max-md:flex'
         />
       </div>
-
       <HomeFilters />
 
       <div className='mt-10 flex w-full flex-col gap-6'>
