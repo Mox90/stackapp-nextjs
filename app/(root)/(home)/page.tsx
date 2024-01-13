@@ -6,37 +6,13 @@ import LocalSearch from '@/components/shared/search/LocalSearch'
 import { Button } from '@/components/ui/button'
 import { HomePageFilters } from '@/constants/filters'
 import { getQuestions } from '@/lib/actions/question.action'
+import { SearchParamsProps } from '@/types'
 import Link from 'next/link'
 
-/* const questions = [
-  {
-    _id: '1',
-    title: 'Cascading deletes in SQLAlchemy?',
-    tags: [
-      { _id: '1', name: 'python' },
-      { _id: '2', name: 'sql' },
-      { _id: '3', name: 'database' },
-    ],
-    author: { _id: '1', name: 'John Doe', avatar: '' },
-    upvotes: 1500000000,
-    views: 500000,
-    answers: [],
-    createdAt: new Date('2023-12-10T20:10:00.000Z'),
-  },
-  {
-    _id: '2',
-    title: 'How to center a div?',
-    tags: [{ _id: '1', name: 'css' }],
-    author: { _id: '1', name: 'John Doe', avatar: '' },
-    upvotes: 10,
-    views: 100,
-    answers: [],
-    createdAt: new Date('2021-09-01T12:00:00.000Z'),
-  },
-] */
-
-export default async function Home() {
-  const { questions } = await getQuestions({})
+export default async function Home({ searchParams }: SearchParamsProps) {
+  const { questions } = await getQuestions({
+    searchQuery: searchParams.q,
+  })
 
   return (
     <>
