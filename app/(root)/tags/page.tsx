@@ -4,11 +4,14 @@ import Filter from '@/components/shared/Filter'
 import LocalSearch from '@/components/shared/search/LocalSearch'
 import { TagFilters, UserFilters } from '@/constants/filters'
 import { getTags } from '@/lib/actions/tag.actions'
+import { SearchParamsProps } from '@/types'
 import Link from 'next/link'
 import React from 'react'
 
-const Page = async () => {
-  const result = await getTags({})
+const Page = async ({ searchParams }: SearchParamsProps) => {
+  const result = await getTags({
+    searchQuery: searchParams.q,
+  })
 
   return (
     <>

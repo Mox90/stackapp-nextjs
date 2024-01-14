@@ -41,7 +41,18 @@ export const getTags = async (params: GetAllTagsParams) => {
   try {
     connectToDatabase()
 
-    const tags = await Tag.find({}).sort({ createdOn: -1 })
+    const { searchQuery } = params
+
+    const query: FilterQuery<typeof Tag> = {}
+
+    if (searchQuery) {
+      query.$or = [
+        { name: { $regex: new RegExp(searchQuery, 'i') } },
+        { description: { $regex: new RegExp(searchQuery, 'i') } },
+      ]
+    }
+
+    const tags = await Tag.find(query).sort({ createdOn: -1 })
 
     return { tags }
   } catch (error) {
@@ -62,7 +73,7 @@ export const getQuestionByTagId = async (params: GetQuestionsByTagIdParams) => {
       path: 'questions',
       model: Question,
       match: searchQuery
-        ? { title: { $regex: searchQuery, $optins: 'i' } }
+        ? { title: { $regex: searchQuery, $options: 'i' } }
         : {},
       options: {
         sort: { createdAt: -1 },

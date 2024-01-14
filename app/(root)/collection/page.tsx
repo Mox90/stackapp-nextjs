@@ -4,16 +4,18 @@ import Filter from '@/components/shared/Filter'
 import LocalSearch from '@/components/shared/search/LocalSearch'
 import { QuestionFilters } from '@/constants/filters'
 import { getAllSavedQuestions } from '@/lib/actions/user.actions'
+import { SearchParamsProps } from '@/types'
 import { auth } from '@clerk/nextjs'
 import React from 'react'
 
-const page = async () => {
+const Home = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth()
 
   if (!userId) return null
 
   const result = await getAllSavedQuestions({
     clerkId: userId,
+    searchQuery: searchParams.q,
   })
 
   return (
@@ -24,7 +26,7 @@ const page = async () => {
 
       <div className='mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center'>
         <LocalSearch
-          route='/'
+          route='/collection'
           iconPosition='left'
           imgSrc='/assets/icons/search.svg'
           placeholder='Search for questions'
@@ -68,4 +70,4 @@ const page = async () => {
   )
 }
 
-export default page
+export default Home
