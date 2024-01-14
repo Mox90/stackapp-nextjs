@@ -76,7 +76,6 @@ export const updateUser = async (params: UpdateUserParams) => {
 
     const { clerkId, updateData, path } = params
 
-    console.log(updateData)
     await User.findOneAndUpdate({ clerkId }, updateData, {
       new: true,
     })

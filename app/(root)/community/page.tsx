@@ -10,6 +10,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
   // const [users, setUsers] = useState([])
   const result = await getUsers({
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   })
 
   return (
