@@ -30,7 +30,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
 
         <Filter
           filters={UserFilters}
-          otherClasses='min-h-[56px] sm:min-w-[170px]'
+          otherClasses='min-h-[56px] sm:min-w-[170px] background-light900_dark300'
         />
       </div>
 
