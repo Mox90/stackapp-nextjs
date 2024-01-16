@@ -2,6 +2,7 @@ import NoResult from '@/components/NoResult'
 import QuestionCard from '@/components/cards/QuestionCard'
 import HomeFilters from '@/components/home/HomeFilters'
 import Filter from '@/components/shared/Filter'
+import Pagination from '@/components/shared/Pagination'
 import LocalSearch from '@/components/shared/search/LocalSearch'
 import { Button } from '@/components/ui/button'
 import { HomePageFilters } from '@/constants/filters'
@@ -10,7 +11,7 @@ import { SearchParamsProps } from '@/types'
 import Link from 'next/link'
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { questions } = await getQuestions({
+  const result = await getQuestions({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
   })
@@ -44,8 +45,8 @@ export default async function Home({ searchParams }: SearchParamsProps) {
       <HomeFilters />
 
       <div className='mt-10 flex w-full flex-col gap-6'>
-        {questions.length > 0 ? (
-          questions.map((question) => {
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => {
             return (
               <QuestionCard
                 key={question._id}
@@ -71,6 +72,14 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           />
         )}
       </div>
+      {result.questions.length > 0 && (
+        <div className='mt-5'>
+          <Pagination
+            pageNumber={searchParams?.page ? +searchParams?.page : 1}
+            isNext={result.isNext}
+          />
+        </div>
+      )}
     </>
   )
 }
