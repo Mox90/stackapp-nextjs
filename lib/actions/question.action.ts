@@ -20,9 +20,12 @@ import { FilterQuery } from 'mongoose'
 export const getQuestions = async (params: GetQuestionsParams) => {
   try {
     connectToDatabase()
-    const { page = 1, pageSize = 10, searchQuery, filter } = params
+    const { page = 1, pageSize = 2, searchQuery, filter } = params
 
     const query: FilterQuery<typeof Question> = {}
+
+    // Calculate the number of posts to skip based on the page number and page size
+    const skipAmount = (page - 1) * pageSize
 
     if (searchQuery) {
       query.$or = [
@@ -53,9 +56,16 @@ export const getQuestions = async (params: GetQuestionsParams) => {
     const questions = await Question.find(query)
       .populate({ path: 'tags', model: Tag })
       .populate({ path: 'author', model: User })
+      .skip(skipAmount)
+      .limit(pageSize)
       .sort(sortOptions)
+
+    const totalQuestions = await Question.countDocuments(query)
+
+    const isNext = totalQuestions > skipAmount + questions.length
+
     // console.log(questions[0].author)
-    return { questions }
+    return { questions, isNext }
   } catch (error) {
     console.log(error)
     throw error

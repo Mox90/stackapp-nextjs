@@ -14,6 +14,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   const result = await getQuestions({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   })
 
   return (
@@ -72,14 +73,13 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           />
         )}
       </div>
-      {result.questions.length > 0 && (
-        <div className='mt-5'>
-          <Pagination
-            pageNumber={searchParams?.page ? +searchParams?.page : 1}
-            isNext={result.isNext}
-          />
-        </div>
-      )}
+
+      <div className='mt-5'>
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams?.page : 1}
+          isNext={result.isNext}
+        />
+      </div>
     </>
   )
 }
