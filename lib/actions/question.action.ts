@@ -20,7 +20,7 @@ import { FilterQuery } from 'mongoose'
 export const getQuestions = async (params: GetQuestionsParams) => {
   try {
     connectToDatabase()
-    const { page = 1, pageSize = 2, searchQuery, filter } = params
+    const { page = 1, pageSize = 20, searchQuery, filter } = params
 
     const query: FilterQuery<typeof Question> = {}
 

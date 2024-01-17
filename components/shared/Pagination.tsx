@@ -14,7 +14,8 @@ const Pagination = ({ pageNumber, isNext }: Props) => {
   const router = useRouter()
 
   const handleNavigation = (direction: string) => {
-    const nextPageNumber = direction === 'prev' ? pageNumber-- : pageNumber++
+    const nextPageNumber =
+      direction === 'prev' ? pageNumber - 1 : pageNumber + 1
 
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
@@ -24,6 +25,8 @@ const Pagination = ({ pageNumber, isNext }: Props) => {
 
     router.push(newUrl)
   }
+
+  if (!isNext && pageNumber === 1) return null
 
   return (
     <div className='flex flex-row justify-end gap-2'>

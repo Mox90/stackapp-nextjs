@@ -1,6 +1,7 @@
 import NoResult from '@/components/NoResult'
 import QuestionCard from '@/components/cards/QuestionCard'
 import Filter from '@/components/shared/Filter'
+import Pagination from '@/components/shared/Pagination'
 import LocalSearch from '@/components/shared/search/LocalSearch'
 import { QuestionFilters } from '@/constants/filters'
 import { getAllSavedQuestions } from '@/lib/actions/user.actions'
@@ -17,6 +18,7 @@ const Home = async ({ searchParams }: SearchParamsProps) => {
     clerkId: userId,
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   })
 
   return (
@@ -66,6 +68,13 @@ const Home = async ({ searchParams }: SearchParamsProps) => {
             linkTitle='Ask a Question'
           />
         )}
+      </div>
+
+      <div className='mt-5'>
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams?.page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </>
   )
