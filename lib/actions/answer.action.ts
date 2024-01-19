@@ -72,11 +72,22 @@ export const createAnswer = async (params: CreateAnswerParams) => {
     const newAnswer = await Answer.create({ content, author, question })
 
     // Add the answer to the question's answers array
-    await Question.findByIdAndUpdate(question, {
+    const questionObject = await Question.findByIdAndUpdate(question, {
       $push: { answers: newAnswer._id },
     })
 
     // TODO: Add interaction...
+    // Create an interaction record for the user's ask_question action
+    await Interaction.create({
+      user: author,
+      action: 'answer',
+      question,
+      answer: newAnswer._id,
+      tags: questionObject._id,
+    })
+
+    // Increment author's reputation by +5 for creating a question
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } })
 
     revalidatePath(path)
   } catch (error) {
@@ -112,7 +123,15 @@ export const upvoteAnswer = async (params: AnswerVoteParams) => {
       throw new Error('Answer not found')
     }
 
-    // Increment author's reputation by +10 for upvoting
+    // Increment author's reputation by +2/-2 for upvoting/revoking an upvote an answer
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasupVoted ? -2 : 2 },
+    })
+
+    // Increment author's reputation by +10/-10 for downvovting an answer
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasupVoted ? -10 : 10 },
+    })
 
     revalidatePath(path)
   } catch (error) {
@@ -148,7 +167,15 @@ export const downvoteAnswer = async (params: AnswerVoteParams) => {
       throw new Error('Question not found')
     }
 
-    // Increment author's reputation by +10 for upvoting
+    // Increment author's reputation by +2/-2 for upvoting/revoking an upvote an answer
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasdownVoted ? -2 : 2 },
+    })
+
+    // Increment author's reputation by +10/-10 for downvovting an answer
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasdownVoted ? -10 : 10 },
+    })
 
     revalidatePath(path)
   } catch (error) {
