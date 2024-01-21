@@ -17,6 +17,8 @@ import {
 import Question from '../models/question.model'
 import Tag from '../models/tag.model'
 import Answer from '../models/answer.model'
+import { BadgeCriteriaType } from '@/types'
+import { assigneBadges } from '../utils'
 
 export const getUserById = async (params: any) => {
   try {
@@ -260,10 +262,73 @@ export const getUserInfo = async (params: GetUserByIdParams) => {
     const totalQuestions = await Question.countDocuments({ author: user._id })
     const totalAnswers = await Answer.countDocuments({ author: user._id })
 
+    const [questionUpvotes] = await Question.aggregate([
+      { $match: { author: user._id } },
+      {
+        $project: {
+          _id: 0,
+          upvotes: { $size: '$upvotes' },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalUpvotes: { $sum: '$upvotes' },
+        },
+      },
+    ])
+
+    const [answerUpvotes] = await Answer.aggregate([
+      { $match: { author: user._id } },
+      {
+        $project: {
+          _id: 0,
+          upvotes: { $size: '$upvotes' },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalUpvotes: { $sum: '$upvotes' },
+        },
+      },
+    ])
+
+    const [questionViews] = await Question.aggregate([
+      { $match: { author: user._id } },
+      {
+        $group: {
+          _id: null,
+          totalViews: { $sum: '$upvotes' },
+        },
+      },
+    ])
+
+    const criteria = [
+      { type: 'QUESTION_COUNT' as BadgeCriteriaType, count: totalQuestions },
+      { type: 'ANSWER_COUNT' as BadgeCriteriaType, count: totalAnswers },
+      {
+        type: 'QUESTION_UPVOTES' as BadgeCriteriaType,
+        count: questionUpvotes?.totalUpvotes || 0,
+      },
+      {
+        type: 'ANSWER_UPVOTES' as BadgeCriteriaType,
+        count: answerUpvotes?.totalUpvotes || 0,
+      },
+      {
+        type: 'TOTAL_VIEWS' as BadgeCriteriaType,
+        count: questionViews?.totalViews || 0,
+      },
+    ]
+
+    const badgeCounts = assigneBadges({ criteria })
+
     return {
       user,
       totalQuestions,
       totalAnswers,
+      badgeCounts,
+      reputation: user.reputation,
     }
   } catch (error) {}
 }
@@ -324,13 +389,3 @@ export const getUserAnswers = async (params: GetUserStatsParams) => {
     throw error
   }
 }
-
-/* export const updateUser = async (params: UpdateUserParams) => {
-  try {
-    connectToDatabase()
-
-  } catch (error) {
-    console.log(error)
-    throw error
-  }
-} */
