@@ -5,7 +5,17 @@ import LocalSearch from '@/components/shared/search/LocalSearch'
 import { UserFilters } from '@/constants/filters'
 import { getUsers } from '@/lib/actions/user.actions'
 import { SearchParamsProps } from '@/types'
+import { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'DevFlow | Community',
+  description:
+    'A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more. ',
+  icons: {
+    icon: '/assets/images/site-logo.svg',
+  },
+}
 
 const Page = async ({ searchParams }: SearchParamsProps) => {
   // const [users, setUsers] = useState([])
@@ -32,7 +42,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
 
         <Filter
           filters={UserFilters}
-          otherClasses='min-h-[56px] sm:min-w-[170px] background-light900_dark300'
+          otherClasses='min-h-[56px] sm:min-w-[170px]'
         />
       </div>
 
