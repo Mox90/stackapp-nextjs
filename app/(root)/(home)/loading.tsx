@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Link } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const Loading = () => {

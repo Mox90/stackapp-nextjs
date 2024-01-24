@@ -7,7 +7,6 @@ import { z } from 'zod'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,8 +14,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '../ui/button'
-import { Badge } from '../ui/badge'
-import Image from 'next/image'
 import { Textarea } from '../ui/textarea'
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'

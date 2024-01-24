@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { getUserById, getUserInfo } from '@/lib/actions/user.actions'
+import { getUserInfo } from '@/lib/actions/user.actions'
 import { URLProps } from '@/types'
 import { SignedIn, auth } from '@clerk/nextjs'
 import Image from 'next/image'
@@ -10,7 +10,6 @@ import ProfileLink from '@/components/shared/ProfileLink'
 import Stats from '@/components/shared/Stats'
 import QuestionTab from '@/components/shared/QuestionTab'
 import AnswerTab from '@/components/shared/AnswerTab'
-import Loading from './loading'
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth()
@@ -84,10 +83,10 @@ const Page = async ({ params, searchParams }: URLProps) => {
       </div>
 
       <Stats
-        reputation={userInfo.reputation}
+        reputation={userInfo?.reputation}
         totalQuestions={userInfo?.totalQuestions}
         totalAnswers={userInfo?.totalAnswers}
-        badges={userInfo.badgeCounts}
+        badges={userInfo?.badgeCounts}
       />
 
       <div className='mt-10 flex gap-10'>

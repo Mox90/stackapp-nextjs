@@ -7,11 +7,11 @@ import { SignedIn } from '@clerk/nextjs'
 import EditDeleteActions from '../shared/EditDeleteActions'
 
 interface Props {
+  clerkId?: string | null | undefined
   _id: string
-  clerkId?: string
   title: string
   tags: { _id: string; name: string }[]
-  author: { _id: string; name: string; picture: string }
+  author: { _id: string; name: string; picture: string; clerkId: string }
   upvotes: string[]
   views: number
   answers: Array<object>
@@ -19,8 +19,8 @@ interface Props {
 }
 
 const QuestionCard = ({
-  _id,
   clerkId,
+  _id,
   title,
   tags,
   author,

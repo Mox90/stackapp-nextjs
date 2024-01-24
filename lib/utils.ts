@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import qs from 'query-string'
-import React from 'react'
 import { BADGE_CRITERIA } from '@/constants'
 import { BadgeCounts } from '@/types'
 
