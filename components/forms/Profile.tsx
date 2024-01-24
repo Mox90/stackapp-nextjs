@@ -21,6 +21,8 @@ import { Textarea } from '../ui/textarea'
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { updateUser } from '@/lib/actions/user.actions'
+import { toast } from '../ui/use-toast'
+import { cn } from '@/lib/utils'
 
 interface Props {
   clerkId: string
@@ -62,6 +64,13 @@ const Profile = ({ clerkId, user }: Props) => {
       })
 
       router.back()
+
+      return toast({
+        className: cn(
+          'top-0 right-0 flex bg-slate-100 text-slate-900 dark:bg-slate-600'
+        ),
+        title: 'Your profile has been updated successfully.',
+      })
     } catch (error) {
       console.log(error)
     } finally {
@@ -73,7 +82,7 @@ const Profile = ({ clerkId, user }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='mt-9 flex w-full flex-col gap-9'
+        className='mt-9 flex w-full flex-col'
       >
         <FormField
           control={form.control}
